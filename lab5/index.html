@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lab</title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <table id="calendar-table">
+            <thead>
+                <tr>
+                    <th>User No
+                        <input type="number" id="userFilter">
+                    </th>
+                    <th>Entry No</th>
+                    <th>Title</th>
+                    <th>Completed
+                        <select id="filter">
+                            <option value="-">-</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="calendar-data">
+            </tbody>
+        </table>
+    
+        <script>
+            let url = 'https://jsonplaceholder.typicode.com/todos';
+            let allData = []; 
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    allData = data; 
+                    renderTable(allData); 
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            // создание таблицы
+            function renderTable(data) {
+                const calendarData = document.getElementById('calendar-data');
+                calendarData.innerHTML = ""; 
+
+                data.forEach(entry => {
+                    const row = document.createElement('tr');
+
+                    const userNoCell = document.createElement('td');
+                    userNoCell.textContent = entry.userId; 
+                    row.appendChild(userNoCell);
+
+                    const entryNoCell = document.createElement('td');
+                    entryNoCell.textContent = entry.id; 
+                    row.appendChild(entryNoCell);
+
+                    const titleCell = document.createElement('td');
+                    titleCell.textContent = entry.title; 
+                    row.appendChild(titleCell);
+
+                    const completedCell = document.createElement('td');
+                    completedCell.textContent = entry.completed ? "Yes" : "No"; 
+                    row.appendChild(completedCell);
+
+                    calendarData.appendChild(row); 
+                });
+            }
+
+            // фильтр на статус 
+            document.getElementById('filter').addEventListener('change', function() {
+                const filterValue = this.value;
+
+                let filteredData = allData;
+
+                if (filterValue === 'yes') {
+                    filteredData = allData.filter(entry => entry.completed === true); 
+                } else if (filterValue === 'no') {
+                    filteredData = allData.filter(entry => entry.completed === false); 
+                }
+
+
+                renderTable(filteredData); 
+            });
+
+            // фильтр на пользователя
+            document.getElementById('userFilter').addEventListener('change', function() {
+                const filterValue = this.value;
+
+                let filteredData = allData;
+
+                let val = allData.filter(entry => entry.userId == filterValue);
+
+                if (val.length > 0) {
+                    filteredData = val; 
+                }
+
+                renderTable(filteredData); 
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lab</title>
+		<link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <input type="text" id="x">
+        <input type="text" id="y">
+        <input type="text" id="z">
+
+        <button id="checkTriangleExistence">Проверить существование треугольника</button>
+        <div id="result"></div>
+
+        <script>
+
+            document.getElementById("checkTriangleExistence").onclick = function() {
+                let x = parseFloat(document.getElementById("x").value);
+                let y = parseFloat(document.getElementById("y").value);
+                let z = parseFloat(document.getElementById("z").value);
+                let res = 'Треугольник не существует';
+                if (
+                    (x > 0) |
+                    (y > 0) |
+                    (z > 0)
+                ) {
+                    let minv = Math.min(x + y, x + z, y + z);
+                    let maxv = Math.max(x, y, z);
+
+                    if (maxv < minv){
+                        res = 'Треугольник существует';
+                    }
+                }
+                document.getElementById("result").innerText = res;
+            }
+        </script>
+    
+    </body>
+</html>

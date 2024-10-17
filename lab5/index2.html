@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab</title>
+    <link rel="stylesheet" href="main.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" placeholder="Search..." v-model="searchString" @input="filterData">
+        <table id="calendar-table">
+            <thead>
+                <tr>
+                    <th>User No
+                        <input type="number" v-model="userFilter" @input="filterData">
+                    </th>
+                    <th>Entry No</th>
+                    <th>Title</th>
+                    <th>Completed
+                        <select v-model="completedFilter" @change="filterData">
+                            <option value="">-</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="entry in filteredData" :key="entry.id">
+                    <td>{{ entry.userId }}</td>
+                    <td>{{ entry.id }}</td>
+                    <td>{{ entry.title }}</td>
+                    <td>{{ entry.completed ? 'Yes' : 'No' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="module">
+        import { createApp} from 'vue'
+
+        createApp({
+            data() {
+                return {
+                    allData: [],
+                    completedFilter: '',
+                    userFilter: '',
+                    searchString: '',
+                    filteredData: []
+                };
+            },
+            mounted() {
+                this.fetchData();
+            },
+            methods: {
+                fetchData() {
+                    const url = 'https://jsonplaceholder.typicode.com/todos';
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.status);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            this.allData = data; 
+                            this.filteredData = data; 
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                },
+                filterData() {
+                    this.filteredData = this.allData.filter(entry => {
+                        let matchesUser;
+                        let matchesCompletion;
+                        let matchesSearchString;
+
+                        if (this.userFilter) {
+                            matchesUser = entry.userId == this.userFilter;
+                        } else {
+                            matchesUser = true;
+                        }
+
+                        if (this.completedFilter === 'yes') {
+                            matchesCompletion = entry.completed;
+                        } else if (this.completedFilter === 'no') {
+                            matchesCompletion = !entry.completed;
+                        } else {
+                            matchesCompletion = true;
+                        }
+
+                        if (this.searchString.trim()) {
+                            matchesSearchString = entry.title.toLowerCase().includes(this.searchString.trim().toLowerCase());
+                        } else {
+                            matchesSearchString = true;
+                        }
+
+                        return matchesUser && matchesCompletion && matchesSearchString;
+                    });
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

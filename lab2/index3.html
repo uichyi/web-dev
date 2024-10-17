@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lab</title>
+		<link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <input type="text" id="balance" onchange="changeBalance">
+        <button id="setBalance">Изменить баланс</button>
+        <div id="result">0</div>
+        <div id="err"></div>
+
+        <script>
+            document.getElementById("setBalance").onclick = function() {
+                let curVal = parseFloat(document.getElementById("result").innerText) || 0; 
+                let oper = parseFloat(document.getElementById("balance").value) || 0;
+                
+                if ((curVal + oper) < 0) {
+                    document.getElementById("err").innerText = 'Недостаточно средств';
+                } else {
+                    document.getElementById("result").innerText = (curVal + oper);
+                    document.getElementById("err").innerText = '';
+                }
+            }
+        </script>
+    </body>
+</html>

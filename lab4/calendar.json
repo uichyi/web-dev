@@ -1,0 +1,46 @@
+{
+    "days":[ 
+        {
+            "day": 1,
+            "month": 1,
+            "monthName": "January",
+            "description": "New Year"
+        },
+        {
+            "day": 1,
+            "month": 12,
+            "monthName": "December",
+            "description": "First day of Winter"
+        },
+        {
+            "day": 1,
+            "month": 4,
+            "monthName": "April",
+            "description": "April Fools' day"
+        },
+        {
+            "day": 9,
+            "month": 5,
+            "monthName": "May",
+            "description": "Victory day"
+        },
+        {
+            "day": 7,
+            "month": 1,
+            "monthName": "January",
+            "description": "Christmas"
+        },
+        {
+            "day": 29,
+            "month": 2,
+            "monthName": "February",
+            "description": "-"
+        },
+        {
+            "day": 11,
+            "month": 11,
+            "monthName": "November",
+            "description": "-"
+        }
+    ]
+}

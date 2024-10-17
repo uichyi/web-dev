@@ -1,0 +1,79 @@
+.container {
+    position: absolute;
+    text-align: center;
+}
+
+.container2 {
+    position: relative;
+    text-align: center; 
+}
+
+.text1 {
+    position: absolute;
+    top: 75px; 
+    left: 150px; 
+}
+
+.text2 {
+    position: absolute;
+    top: 160px; 
+    left: 100px; 
+}
+
+.text3 {
+    position: absolute;
+    top: 160px; 
+    left: 330px; 
+}
+
+.text4 {
+    position: absolute;
+    top: 410px; 
+    left: 270px; 
+}
+
+.text5 {
+    position: absolute;
+    top: 465px; 
+    left: 280px; 
+}
+
+.text6 {
+    position: absolute;
+    top: 490px; 
+    left: 270px; 
+}
+
+.text7 {
+    position: absolute;
+    top: 520px; 
+    left: 200px; 
+}
+
+.text8 {
+    position: absolute;
+    top: 520px; 
+    left: 320px; 
+}
+
+.text9 {
+    position: absolute;
+    top: 545px; 
+    left: 280px; 
+}
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 20px auto;
+}
+
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.bck {
+    background-color: rgb(224, 224, 224);   
+}

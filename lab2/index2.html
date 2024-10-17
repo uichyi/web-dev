@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lab</title>
+		<link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <input type="text" id="Y1">
+        <button id="yminustwo">Выполнить</button>
+        <div id="result"></div>
+
+        <script>
+            document.getElementById("yminustwo").onclick = function() {
+                let Y = parseFloat(document.getElementById("Y1").value);
+                const calc = {
+                    power: (Y - 2) ** Y
+                }
+                document.getElementById("result").innerText = calc.power;
+            }
+        </script>
+    </body>
+</html>

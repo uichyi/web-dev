@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lab</title>
+		<link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div class="container2">
+            <h1>Таблица Пифагора</h1>
+            <label for="sizeInput">Размер таблицы: </label>
+            <input type="number" id="size" value="9">
+            <button onclick="generate()">Сгенерировать таблицу</button>
+            <table id="pTable"></table>
+        </div>
+    
+    
+        <script>
+            function generate() {
+                const size = parseInt(document.getElementById('size').value);
+                const table = document.getElementById('pTable');
+                table.innerHTML = ''; 
+
+
+                for (let i = 1; i <= size; i++) {
+                    let row = `<tr>`;
+                    for (let j = 1; j <= size; j++) {
+                        if (i == j) {
+                            row += `<td class="bck">${i * j}</td>`; 
+                        } else {
+                            row += `<td>${i * j}</td>`;    
+                        }
+                    }
+                    row += '</tr>';
+                    table.innerHTML += row;
+                }
+            }
+        </script>
+       
+    </body>
+</html>
