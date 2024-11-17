@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск самого дешевого товара</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <input type="text" id="products" placeholder="Информация о товарах, например: картошка: 45, 70, 81;"></input><br><br>
+    <input type="submit" value="Показать" onclick="analyzePrices()"></input>
+    <div id="result"></div>
+
+    <script>
+        function analyzePrices() {
+            const productsInput = document.getElementById('products').value.trim();
+            const productsArray = productsInput.split('; ').filter(item => item); 
+            const priceData = {};
+
+            productsArray.forEach(product => {
+                const [name, prices] = product.split(':');
+                const pricesArray = prices.split(',').map(Number);
+                
+                let total = 0;
+                for (let price of pricesArray) {
+                    total += price;
+                }
+
+                const averagePrice = total / pricesArray.length;
+
+                priceData[name] = averagePrice;
+            });
+
+            const sortedProducts = Object.entries(priceData).sort(([nameA, priceA], [nameB, priceB]) => {
+                if (priceA === priceB) {
+                    return nameA.localeCompare(nameB); 
+                }
+                return priceA - priceB; 
+            });
+
+            const resultOutput = document.getElementById('result');
+            resultOutput.innerHTML = '';
+            sortedProducts.forEach(([name]) => {
+                resultOutput.innerHTML += name + '\n';
+            });
+        }
+    </script>
+</body>
+</html>

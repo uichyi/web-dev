@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Определение товара с максимальной прибылью</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <input type="text" id="sales" placeholder="Записи о продажах, например: Шоколад,1000; Мармеладки,600; END"></input><br><br>
+    <input type="submit" value="Показать товар с максимальной прибылью" onclick="findMaxProfitProduct()"></input>
+    <div id="result"></div>
+
+    <script>
+        function findMaxProfitProduct() {
+            const salesInput = document.getElementById('sales').value;
+            const salesLines = salesInput.split('; ');
+
+            const profitData = {};
+
+            salesLines.forEach(line => {
+                if (line === "END") return;              
+
+                const [product, profitString] = line.split(',');
+                const profit = parseInt(profitString);
+
+                if (!profitData[product]) {
+                    profitData[product] = 0;
+                }
+                profitData[product] += profit; 
+            });
+
+            let maxProfitProduct = '';
+            let maxProfitValue = 0;
+
+            for (const [product, totalProfit] of Object.entries(profitData)) {
+                if (totalProfit > maxProfitValue) {
+                    maxProfitValue = totalProfit;
+                    maxProfitProduct = product;
+                }
+            }
+
+            const resultOutput = document.getElementById('result');
+            resultOutput.innerHTML = `${maxProfitProduct} ${maxProfitValue}`;
+        }
+    </script>
+</body>
+</html>

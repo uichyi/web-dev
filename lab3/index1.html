@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Проверка на палиндром</title>
+		<link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <input type="text" id="str">
+        <input type="submit" value="Проверить" onclick="checkPalindrome()"></button>
+        <div id="result"></div>
+
+        <script>
+            function checkPalindrome(){
+                let str = document.getElementById('str').value.toLowerCase().replaceAll(' ','');
+                let res = document.getElementById('result');
+                let val = '';
+
+                for (let i = str.length - 1; i > -1; i--){
+                    val += str[i];
+                }
+                if (val == str){
+                    res.innerText = 'Это палиндром';
+                } else {
+                    res.innerText = 'Не палиндром'
+                }
+            }
+        </script>
+    
+    </body>
+</html>

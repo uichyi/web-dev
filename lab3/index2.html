@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Угадай число</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <input type="number" placeholder="От:" id="start">
+    <input type="number" placeholder="До:" id="end">
+    <input type="submit" value="Указать интервал" onclick="setRange()">
+    <div id="result"></div>
+    
+    <input type="number" placeholder="Ваше число" id="guess" style="display:none;">
+    <input type="submit" value="Проверить" id="checkButton" style="display:none;" onclick="checkGuess()">
+
+    <script>
+        let randomNumber;
+        let attempts = 10;
+
+        function setRange() {
+            let start = Number(document.getElementById('start').value);
+            let end = Number(document.getElementById('end').value);
+
+            if (start >= end) {
+                document.getElementById('result').innerText = "Пожалуйста, введите правильные границы.";
+                return;
+            }
+
+            randomNumber = Math.floor(Math.random() * (end - start + 1)) + start;
+            attempts = 10;
+            document.getElementById('result').innerText = "Случайное число выбрано. У вас 10 попыток.";
+            document.getElementById('guess').style.display = "inline";
+            document.getElementById('checkButton').style.display = "inline";
+        }
+
+        function checkGuess() {
+            if (attempts > 0) {
+                let guess = Number(document.getElementById('guess').value);
+                attempts--;
+
+                if (guess === randomNumber) {
+                    document.getElementById('result').innerText = "Вы угадали число!";
+                    resetGame();
+                } else if (attempts === 0) {
+                    document.getElementById('result').innerText = `Игра окончена. Загаданное число было ${randomNumber}.`;
+                    resetGame();
+                } else {
+                    let hint = guess < randomNumber ? "больше" : "меньше";
+                    document.getElementById('result').innerText = `Загаданное число ${hint}. У вас осталось ${attempts} попыток.`;
+                }
+            }
+        }
+
+        function resetGame() {
+            document.getElementById('start').value = '';
+            document.getElementById('end').value = '';
+            document.getElementById('guess').style.display = "none";
+            document.getElementById('checkButton').style.display = "none";
+        }
+    </script>
+</body>
+</html>
+

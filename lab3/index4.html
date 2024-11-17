@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск самого низкокалорийного продукта</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <input type="text" id="products" placeholder="Продукты (через пробел):"><br><br>
+    <input type="text" id="nutrients" placeholder="Белки, жиры, углеводы, например 11-11-11 через пробел"><br><br>
+    
+    <input type="submit" value="Вычислить" onclick="findLowestCalorie()"></button>
+    
+    <dev id="result"></dev>
+
+    <script>
+        function findLowestCalorie() {
+            const productsInput = document.getElementById('products').value;
+            const nutrientsInput = document.getElementById('nutrients').value;
+
+            const products = productsInput.split(' ');
+            const nutrients = nutrientsInput.split(' ');
+
+            if (products.length !== nutrients.length) {
+                document.getElementById('result').innerText = 'Количество продуктов и информации о питательных веществах не совпадает.';
+                return;
+            }
+
+            let lowestCalorieProduct = '';
+            let lowestCalorieValue = 2000000000;
+
+            products.forEach((product, index) => {
+                const [proteins, fats, carbohydrates] = nutrients[index].split('-').map(Number);
+                
+                const calories = 0.4 * proteins + 0.3 * fats + 0.3 * carbohydrates;
+
+                if (calories < lowestCalorieValue) {
+                    lowestCalorieValue = calories;
+                    lowestCalorieProduct = product;
+                }
+            });
+
+            document.getElementById('result').innerText = `Самый низкокалорийный продукт: ${lowestCalorieProduct}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск отстающего</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <input type="text" id="names" placeholder="Имена учеников (через запятую и пробел):"><br><br>
+    <input type="text" id="grades" placeholder="Оценки формата 11-11-11 через пробел"><br><br>
+    
+    <input type="submit" value="Проверить" onclick="findLowest()"></button>   
+    <div id="result"></div>
+
+    <script>
+        function findLowest() {
+            const namesInput = document.getElementById('names').value;
+            const gradesInput = document.getElementById('grades').value;
+
+            const names = namesInput.split(', ');
+            const grades = gradesInput.split(' ');
+
+            if (names.length !== grades.length) {
+                document.getElementById('result').innerText = 'Количество имен и оценок не совпадает.';
+                return;
+            }
+
+            let lowestAverageStudent = '';
+            let lowestAverageScore = 1000;
+
+            names.forEach((name, index) => {
+                const scores = grades[index].split('-').map(Number);
+
+                let total = 0;
+                for (let score of scores) {
+                    total += score;
+                }
+
+                const average = total / scores.length;
+
+                if (average < lowestAverageScore) {
+                    lowestAverageScore = average;
+                    lowestAverageStudent = name;
+                }
+            });
+
+            document.getElementById('result').innerText = `Отстающий ученик: ${lowestAverageStudent}`;
+        }
+    </script>
+</body>
+</html>

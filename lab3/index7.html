@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Концерты любимых групп</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <input type="text" id="concerts" placeholder="Поиск группы с наибольшим количеством концертов в 2023 году например: Агата Кристи, 23.02.2024;END"></input><br><br>
+    <input type="submit" value="Показать группу с наибольшим количеством концертов в 2023 году" onclick="findMaxConcerts()"></input>
+    <div id="result"></div>
+
+    <script>
+        function findMaxConcerts() {
+            const concertsInput = document.getElementById('concerts').value;
+            const concertLines = concertsInput.split('; ');
+            
+            const concertData = {};
+
+            concertLines.forEach(line => {
+                if (line === "END") return; 
+
+                const [group, date] = line.split(', ');
+                const [day, month, year] = date.split('.').map(Number);
+
+                if (year === 2023) {
+                    if (!concertData[group]) {
+                        concertData[group] = 0;
+                    }
+                    concertData[group] += 1; 
+                }
+            });
+
+            let maxConcertsGroup = '';
+            let maxConcertsCount = 0;
+
+            for (const [group, count] of Object.entries(concertData)) {
+                if (count > maxConcertsCount) {
+                    maxConcertsCount = count;
+                    maxConcertsGroup = group;
+                }
+            }
+
+            const resultOutput = document.getElementById('result');
+            resultOutput.innerHTML = `${maxConcertsGroup} ${maxConcertsCount}`;
+        }
+    </script>
+</body>
+</html>

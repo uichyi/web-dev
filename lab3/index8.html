@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск городов</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <input type="text" id="cityInput" placeholder="Поиск городов, например: Самара"><br><br>
+    
+    <input type="submit" value="Найти города" onclick="findCities()"></button>
+    
+    <div id="resultTitle"></div>
+    <div id="result"></div>
+
+    <script>
+        const cities = [
+            "Санкт-Петербург", "Саратов", "Самара", 
+            "Москва", "Магадан", "Ярославль", "Якутск"
+        ];
+
+        function findCities() {
+            const inputCity = document.getElementById('cityInput').value;
+            let foundCities = [];
+            const firstLetter = inputCity.charAt(0);
+
+            for (let i = 0; i < cities.length; i++) {
+                if (cities[i].startsWith(firstLetter)) {
+                    foundCities.push(cities[i]);
+                }
+            }
+
+
+            if (cities.includes(inputCity)) {
+                document.getElementById('resultTitle').innerText = `Города, начинающиеся с буквы "${inputCity.charAt(0)}":`;
+                document.getElementById('result').innerText = foundCities.join(', ');
+            } else {
+                document.getElementById('resultTitle').innerText = '';
+                document.getElementById('result').innerText = `Такого города нет в списке`;
+            }
+        }
+    </script>
+</body>
+</html>
