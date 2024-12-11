@@ -1,9 +1,15 @@
+<!-- 
+TRK 11-12-2024 Добавил рамку для выбранного эмодзи
+-->
+
 <template>
   <div class="container text-center">
     <div v-if="!gameOver">
       <div class="row" v-for="rowIndex in getRowCount" :key="rowIndex">
         <div class="col-3" v-for="(emoji, index) in getRowEmojis(rowIndex)" :key="index">
-          <div :class="['emoji']" @click="selectEmoji(index + (rowIndex - 1) * 4)">
+          <div :class="['emoji'
+          , { 'selected-emoji': isSelected(index, rowIndex) } // TRK 11-12-2024
+          ]" @click="selectEmoji(index + (rowIndex - 1) * 4)">  
             {{ emoji }}
           </div>
         </div>
@@ -40,6 +46,12 @@ export default {
       const startIndex = (rowIndex - 1) * 4;
       return this.emojis.slice(startIndex, startIndex + 4); 
     },
+    // TRK 11-12-2024 ->
+    isSelected(index, rowIndex) {
+      const actualIndex = index + (rowIndex - 1) * 4;
+      return actualIndex == this.firstChoice || actualIndex == this.secondChoice;
+    },
+    // TRK 11-12-2024 <-
     getRandomEmojis(count) {
       const emojiList = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭', '😤', '😠', '😡', '🤬', '🤯', '😳', '🥵', '🥶', '😱', '😨', '😰', '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑', '😬', '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪', '😵', '🤐', '🥴', '🤢', '🤮', '🤧', '😷', '🤒', '🤕', '🤑', '🤠', '😈', '👿', '👹', '👺', '🤡', '💩', '👻', '💀', '☠️', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾'];
       const selectedEmojis = [];
@@ -115,4 +127,9 @@ export default {
   border-radius: 8px; 
   height: 100px; 
 }
+/* TRK 11-12-2024 -> */
+.selected-emoji {
+  border-color: blue;
+}
+/* TRK 11-12-2024 <- */
 </style>
