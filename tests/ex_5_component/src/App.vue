@@ -1,5 +1,5 @@
 <!-- 
-TRK 11-12-2024 Добавил описание к игре перед началом игры
+TRK 11-12-2024 Добавил описание к игре перед началом игры, Тест 4
 -->
 
 <template>
@@ -9,7 +9,7 @@ TRK 11-12-2024 Добавил описание к игре перед начал
       <button class="btn btn-secondary" @click="selectApp('test1')">Найди пару эмодзи</button>
       <button class="btn btn-secondary" @click="selectApp('test2')">Путь стрелки</button>
       <button class="btn btn-secondary" @click="selectApp('test3')">Совпадает ли эмодзи?</button>
-      <button class="btn btn-secondary" @click="selectApp('test4')">Тест 4</button>
+      <button class="btn btn-secondary" @click="selectApp('test4')">Сравнение чисел</button>
       <button class="btn btn-secondary" @click="selectApp('test5')">Тест 5</button>
     </div>
     <div v-if="selectedGame"> <!-- TRK 11-12-2024 -->
@@ -23,7 +23,7 @@ TRK 11-12-2024 Добавил описание к игре перед начал
         <Test3/>
       </div>
       <div v-else-if="selectedApp == 'test4'">
-
+        <Test4/> <!-- TRK 11-12-2024 --> 
       </div>
       <div v-else-if="selectedApp == 'test5'">
         
@@ -44,7 +44,7 @@ TRK 11-12-2024 Добавил описание к игре перед начал
           За одну минуту, вам необходимо как можно больше раз указать, изменился ли эмодзи или нет.</p>
       </div>
       <div v-else-if="selectedApp == 'test4'">
-
+        <p>Перед вами два числа. Вам необходимо сравнить, какое число больше, а какое меньше</p>
       </div>
       <div v-else-if="selectedApp == 'test5'">
         
@@ -65,12 +65,14 @@ TRK 11-12-2024 Добавил описание к игре перед начал
 import Test1 from './components/Test1.vue';
 import Test2 from './components/Test2.vue';
 import Test3 from './components/Test3.vue';
+import Test4 from './components/Test4.vue';
 
 export default {
   components: {
     Test1,
     Test2,
-    Test3 
+    Test3, 
+    Test4 // TRK 11-12-2024
   },
   data() {
     return {
