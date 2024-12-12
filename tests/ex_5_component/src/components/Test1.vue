@@ -49,7 +49,7 @@ export default {
     // TRK 11-12-2024 ->
     isSelected(index, rowIndex) {
       const actualIndex = index + (rowIndex - 1) * 4;
-      return actualIndex == this.firstChoice || actualIndex == this.secondChoice;
+      return actualIndex == this.firstChoice; 
     },
     // TRK 11-12-2024 <-
     getRandomEmojis(count) {

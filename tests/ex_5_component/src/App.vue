@@ -1,5 +1,6 @@
 <!-- 
 TRK 11-12-2024 Добавил описание к игре перед началом игры, Тест 4
+TRK 12-12-2024 Добавил Тест 5
 -->
 
 <template>
@@ -10,7 +11,7 @@ TRK 11-12-2024 Добавил описание к игре перед начал
       <button class="btn btn-secondary" @click="selectApp('test2')">Путь стрелки</button>
       <button class="btn btn-secondary" @click="selectApp('test3')">Совпадает ли эмодзи?</button>
       <button class="btn btn-secondary" @click="selectApp('test4')">Сравнение чисел</button>
-      <button class="btn btn-secondary" @click="selectApp('test5')">Тест 5</button>
+      <button class="btn btn-secondary" @click="selectApp('test5')">Преобладающий цвет</button>
     </div>
     <div v-if="selectedGame"> <!-- TRK 11-12-2024 -->
       <div v-if="selectedApp == 'test1'">
@@ -26,7 +27,7 @@ TRK 11-12-2024 Добавил описание к игре перед начал
         <Test4/> <!-- TRK 11-12-2024 --> 
       </div>
       <div v-else-if="selectedApp == 'test5'">
-        
+        <Test5/> <!-- TRK 12-12-2024 --> 
       </div>
     <!-- TRK 11-12-2024 -> -->
     </div>
@@ -41,13 +42,13 @@ TRK 11-12-2024 Добавил описание к игре перед начал
       </div>
       <div v-else-if="selectedApp == 'test3'">
         <p>Перед вами один эмодзи, который будет виден на протяжении 3 секунд. После, он заменится другим либо тем же самым. <br>
-          За одну минуту, вам необходимо как можно больше раз указать, изменился ли эмодзи или нет.</p>
+          За одну минуту вам необходимо как можно больше раз указать, изменился ли эмодзи или нет.</p>
       </div>
       <div v-else-if="selectedApp == 'test4'">
-        <p>Перед вами два числа. Вам необходимо сравнить, какое число больше, а какое меньше</p>
+        <p>Перед вами два числа. За одну минуту вам необходимо сравнить как можно больше раз, какое число больше, а какое меньше</p>
       </div>
       <div v-else-if="selectedApp == 'test5'">
-        
+        <p>Перед вами оттенок. За одну минуту вам необходимо определить как можно больше раз, какой цвет преобладает в этом оттенке</p> <!-- TRK 12-12-2024 --> 
       </div>
       <div v-if="selectedApp">
         <button class="btn btn-primary" @click="startGame()">Начать игру</button>  
@@ -65,14 +66,16 @@ TRK 11-12-2024 Добавил описание к игре перед начал
 import Test1 from './components/Test1.vue';
 import Test2 from './components/Test2.vue';
 import Test3 from './components/Test3.vue';
-import Test4 from './components/Test4.vue';
+import Test4 from './components/Test4.vue'; // TRK 11-12-2024
+import Test5 from './components/Test5.vue'; // TRK 12-12-2024
 
 export default {
   components: {
     Test1,
     Test2,
     Test3, 
-    Test4 // TRK 11-12-2024
+    Test4, // TRK 11-12-2024
+    Test5 // TRK 12-12-2024
   },
   data() {
     return {
